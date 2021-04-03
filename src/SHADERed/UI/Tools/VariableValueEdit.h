@@ -17,6 +17,7 @@ namespace ed {
 		bool m_drawRegular();
 		bool m_drawFunction();
 
+		glm::vec3 test_variable; // this is only for test purposes and is not supposed to be here
 		ed::InterfaceManager* m_data;
 		ed::ShaderVariable* m_var;
 	};

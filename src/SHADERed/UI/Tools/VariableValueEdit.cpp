@@ -1,13 +1,13 @@
 #include <SHADERed/Objects/CameraSnapshots.h>
 #include <SHADERed/Objects/FunctionVariableManager.h>
-#include <SHADERed/Objects/Settings.h>
 #include <SHADERed/Objects/Names.h>
+#include <SHADERed/Objects/Settings.h>
 #include <SHADERed/UI/Icons.h>
 #include <SHADERed/UI/Tools/VariableValueEdit.h>
 
+#include <imGuIZMO.quat/imGuIZMO.quat/imGuIZMOquat.h>
 #include <imgui/imgui.h>
 #include <glm/glm.hpp>
-
 namespace ed {
 	VariableValueEditUI::VariableValueEditUI(ed::InterfaceManager* data)
 	{
@@ -101,13 +101,11 @@ namespace ed {
 				ret = true;
 			break;
 		case ed::ShaderVariable::ValueType::Float3:
+			// Simple test case if the gizmo3D works
 			ImGui::PushItemWidth(Settings::Instance().CalculateSize(-30));
-			if (ImGui::DragFloat3(("##valuedit" + std::string(m_var->Name)).c_str(), m_var->AsFloatPtr(), 0.1f))
+			if (ImGui::gizmo3D("Test", test_variable)) {
 				ret = true;
-			ImGui::PopItemWidth();
-			ImGui::SameLine();
-			if (ImGui::ColorEdit3(("##valuedit_cpick_" + std::string(m_var->Name)).c_str(), m_var->AsFloatPtr(), ImGuiColorEditFlags_NoInputs))
-				ret = true;
+			}
 			break;
 		case ed::ShaderVariable::ValueType::Float4:
 			ImGui::PushItemWidth(Settings::Instance().CalculateSize(-30));
@@ -271,7 +269,7 @@ namespace ed {
 
 							if (item->Type != PipelineItem::ItemType::Geometry && item->Type != PipelineItem::ItemType::Model && item->Type != PipelineItem::ItemType::VertexBuffer)
 								continue;
-							
+
 							bool is_selected = strcmp(m_var->Arguments, item->Name) == 0;
 							if (ImGui::Selectable(item->Name, is_selected)) {
 								strcpy(m_var->Arguments, item->Name);
