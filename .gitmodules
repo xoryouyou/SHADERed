@@ -35,3 +35,6 @@
 	path = libs/SpvGenTwo
 	url = https://github.com/dfranx/SpvGenTwo
 	ignore = dirty
+[submodule "libs/imGuIZMO.quat"]
+	path = libs/imGuIZMO.quat
+	url = git@github.com:BrutPitt/imGuIZMO.quat.git

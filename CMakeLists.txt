@@ -108,6 +108,7 @@ set(SOURCES
 	libs/ShaderExpressionParser/Tokenizer.cpp
 	libs/misc/ImFileDialog.cpp
 	libs/misc/dds.c
+	libs/imGuIZMO.quat/imGuIZMO.quat/imGuIZMOquat.cpp
 )
 
 # add header files
@@ -188,6 +189,9 @@ add_subdirectory(libs/glslang)
 # SPIRV-VM
 add_subdirectory(libs/SPIRV-VM)
 
+# imGuIZMO
+add_compile_definitions(VGIZMO_USES_GLM)
+add_compile_definitions(VGM_DISABLE_AUTO_NAMESPACE)
 # Native macOS frameworks
 if (APPLE)
 	# Link Homebrew library path for Mojave and up
@@ -208,7 +212,7 @@ set_target_properties(SHADERed PROPERTIES
 
 # include directories
 target_include_directories(SHADERed PRIVATE ${SDL2_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${OPENGL_INCLUDE_DIRS} ${ASSIMP_INCLUDE_DIR})
-target_include_directories(SHADERed PRIVATE src libs libs/glslang libs/SPIRV-VM/inc libs/spirv-headers/include libs/spirv-tools/include)
+target_include_directories(SHADERed PRIVATE src libs libs/glslang libs/SPIRV-VM/inc libs/spirv-headers/include libs/spirv-tools/include libs/imGuIZMO.quat)
 if (NOT WIN32)
 	target_include_directories(SHADERed PRIVATE ${GTK_INCLUDE_DIRS})
 endif()
